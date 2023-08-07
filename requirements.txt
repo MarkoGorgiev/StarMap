@@ -1,3 +1,4 @@
+# python 3.9 required
 numpy==1.21.1
 datetime
 geopy
