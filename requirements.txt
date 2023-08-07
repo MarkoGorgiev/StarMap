@@ -1,0 +1,9 @@
+numpy==1.21.1
+datetime
+geopy
+tzwhere
+pytz
+numpy
+matplotlib
+skyfield
+pandas
