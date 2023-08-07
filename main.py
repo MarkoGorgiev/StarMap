@@ -120,7 +120,7 @@ def create_star_chart(location, when, chart_size, max_star_size):
 
 if __name__ == '__main__':
     # call the above function with a given location and timestamp
-    location = 'Gevgelija, MK'
+    location = 'Skopje, MK'
     when = '1997-06-24 12:15'
     stars, edges_star1, edges_star2 = collect_celestial_data(location, when)
     chart_size = 12
