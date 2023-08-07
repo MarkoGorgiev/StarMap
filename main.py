@@ -93,27 +93,42 @@ def create_star_chart(location, when, chart_size, max_star_size):
     lines_xy = np.rollaxis(np.array([xy1, xy2]), 1)
 
     # Time to build the figure!
-    fig, ax = plt.subplots(figsize=(chart_size, chart_size), facecolor='#041A40')
+    fig, ax = plt.subplots(figsize=(chart_size, chart_size))
+    # fig, ax = plt.subplots(figsize=(chart_size, chart_size), facecolor='#041A40')
 
     # Draw the constellation lines.
-    ax.add_collection(LineCollection(lines_xy, colors='#ffff', linewidths=0.15))
+    # ax.add_collection(LineCollection(lines_xy, colors='#ffff', linewidths=0.15))
+
+    border = plt.Circle((0, 0), 1, color='#041A40', fill=True)
+    ax.add_patch(border)
 
     # Draw the stars.
     ax.scatter(stars['x'][bright_stars], stars['y'][bright_stars],
                s=marker_size, color='white', marker='.', linewidths=0,
                zorder=2)
+    ax.add_collection(LineCollection(lines_xy, colors='#ffff', linewidths=0.15))
+    # Finally, add other settings
+    # ax.set_aspect('equal')
+    # ax.set_xlim(-1, 1)
+    # ax.set_ylim(-1, 1)
+    # plt.axis('off')
+    # when_datetime = datetime.strptime(when, '%Y-%m-%d %H:%M')
+    # plt.title(f"Observation Location: {location}, Time: {when_datetime.strftime('%Y-%m-%d %H:%M')}", loc='right',
+    #           color='white', fontsize=10)
+    # filename = f"{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
+    # # plt.savefig(filename, format='png', dpi=1200)
+    #
+    # plt.show()
+    # plt.close()
+    horizon = Circle((0, 0), radius=1, transform=ax.transData)
+    for col in ax.collections:
+        col.set_clip_path(horizon)
 
     # Finally, add other settings
-    ax.set_aspect('equal')
     ax.set_xlim(-1, 1)
     ax.set_ylim(-1, 1)
     plt.axis('off')
-    when_datetime = datetime.strptime(when, '%Y-%m-%d %H:%M')
-    plt.title(f"Observation Location: {location}, Time: {when_datetime.strftime('%Y-%m-%d %H:%M')}", loc='right',
-              color='white', fontsize=10)
-    filename = f"{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
-    # plt.savefig(filename, format='png', dpi=1200)
-
+    # fig.subplots_adjust(left=0.126, bottom=0.043, right=0.84, top=0.938)
     plt.show()
     plt.close()
 
