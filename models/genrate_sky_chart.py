@@ -117,21 +117,7 @@ class DateTimeLocation(BaseModel):
                    s=marker_size, color='white', marker='.', linewidths=0,
                    zorder=2)
         ax.add_collection(LineCollection(lines_xy, colors='#ffff', linewidths=0.15))
-        # Finally, add other settings
-        # ax.set_aspect('equal')
-        # ax.set_xlim(-1, 1)
-        # ax.set_ylim(-1, 1)
-        # plt.axis('off')
 
-        when_datetime = datetime.strptime(self.date_time, '%Y-%m-%d %H:%M')
-        plt.title(f"Observation Location: {self.location}, Time: {when_datetime.strftime('%Y-%m-%d %H:%M')}", loc='right',
-                  color='white', fontsize=10)
-
-        filename = f"{self.location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
-        plt.savefig(filename, format='png', dpi=1200)
-
-        # plt.show()
-        # plt.close()
         horizon = Circle((0, 0), radius=1, transform=ax.transData)
         for col in ax.collections:
             col.set_clip_path(horizon)
@@ -141,5 +127,12 @@ class DateTimeLocation(BaseModel):
         ax.set_ylim(-1, 1)
         plt.axis('off')
         # fig.subplots_adjust(left=0.126, bottom=0.043, right=0.84, top=0.938)
+        when_datetime = datetime.strptime(self.date_time, '%Y-%m-%d %H:%M')
+        plt.title(f"Observation Location: {self.location}, Time: {when_datetime.strftime('%Y-%m-%d %H:%M')}",
+                  loc='right',
+                  color='white', fontsize=10)
+
+        filename = f"{self.location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
+        plt.savefig(filename, format='png', dpi=1200)
         plt.show()
         plt.close()
