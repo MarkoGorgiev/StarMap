@@ -1,4 +1,7 @@
 # python 3.9 required
+fastapi
+uvicorn
+pydantic
 numpy==1.21.1
 datetime
 geopy
