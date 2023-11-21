@@ -50,6 +50,7 @@ class DateTimeLocation(BaseModel):
         # Get latitude coordinates
         locator = Nominatim(user_agent='myGeocoder', timeout=10)
         location = locator.geocode(location)
+        # we can make this map to get long lat from args so we can get more precise data
         lat, long = location.latitude, location.longitude
 
         # Convert date string into datetime object
